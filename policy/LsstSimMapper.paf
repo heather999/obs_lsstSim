@@ -20,13 +20,9 @@ defaultSubLevels: {
 }
 
 exposures: {
+    # dataset defined in obs_base modified in this mapper as follows:
     raw: {
         template:    "raw/v%(visit)d-f%(filter)s/E%(snap)03d/R%(raft)s/S%(sensor)s/imsim_%(visit)d_R%(raft)s_S%(sensor)s_C%(channel)s_E%(snap)03d.fits.gz"
-        python:     "lsst.afw.image.DecoratedImageU"
-        persistable:         "DecoratedImageU"
-        storage:     "FitsStorage"
-        level:        "Amp"
-        tables:        raw
     }
     eimage: {
         template:    "eimage/v%(visit)d-f%(filter)s/E%(snap)03d/R%(raft)s/eimage_%(visit)d_R%(raft)s_S%(sensor)s_E%(snap)03d.fits.gz"
@@ -44,37 +40,17 @@ exposures: {
         level:        "Ccd"
         tables:        raw
     }
+    # dataset defined in obs_base modified in this mapper as follows:
     postISRCCD: {
         template:    "postISRCCD/v%(visit)d-f%(filter)s/R%(raft)s/S%(sensor)s.fits"
-        python:        "lsst.afw.image.ExposureF"
-        persistable:        "ExposureF"
-        storage:    "FitsStorage"
-        level:        "Ccd"
-        tables:        raw
     }
-    visitim: {
-        template:      "visitim/v%(visit)d-f%(filter)s/R%(raft)s/S%(sensor)s.fits"
-        python:        "lsst.afw.image.ExposureF"
-        persistable:        "ExposureF"
-        storage:    "FitsStorage"
-        level:        "Ccd"
-        tables:        raw
-    }
+    # dataset defined in obs_base modified in this mapper as follows:
     icExp: {
         template:      "icExp/v%(visit)d-f%(filter)s/R%(raft)s/S%(sensor)s.fits"
-        python:        "lsst.afw.image.ExposureF"
-        persistable:        "ExposureF"
-        storage:    "FitsStorage"
-        level:        "Ccd"
-        tables:        raw
     }
+    # dataset defined in obs_base modified in this mapper as follows:
     calexp: {
         template:      "calexp/v%(visit)d-f%(filter)s/R%(raft)s/S%(sensor)s.fits"
-        python:        "lsst.afw.image.ExposureF"
-        persistable:        "ExposureF"
-        storage:    "FitsStorage"
-        level:        "Ccd"
-        tables:        raw
     }
     calsnap: {
         template:      "calsnap/v%(visit)d-f%(filter)s/s%(snap)d/R%(raft)s/S%(sensor)s.fits"
@@ -90,12 +66,6 @@ exposures: {
     }
     wcs: {
         template:      "wcs/v%(visit)d-f%(filter)s/R%(raft)s/S%(sensor)s.wcs.fits"
-        python:        "lsst.afw.image.ExposureI"
-        persistable:        "ExposureI"
-        storage:    "FitsStorage"
-        level:        "Ccd"
-        tables:        "raw"
-        tables:        "raw_visit"
     }
     fcr: {
         template:      "fcr/v%(visit)d-f%(filter)s/R%(raft)s/S%(sensor)s.fcr.fits"
@@ -188,6 +158,7 @@ datasets: {
         storage:      "ignored"
         tables:       "raw"
     }
+    # dataset defined in obs_base modified in this mapper as follows:
     icExpBackground: {
         template:      "icExp/v%(visit)d-f%(filter)s/R%(raft)s/bkgd-S%(sensor)s.fits"
         python:        "lsst.afw.math.BackgroundList"
@@ -195,19 +166,13 @@ datasets: {
         storage:       "FitsCatalogStorage"
         tables:        raw
     }
+    # dataset defined in obs_base modified in this mapper as follows:
     calexpBackground: {
         template:      "calexp/v%(visit)d-f%(filter)s/R%(raft)s/bkgd-S%(sensor)s.fits"
-        python:        "lsst.afw.math.BackgroundList"
-        persistable:   "PurePythonClass"
-        storage:       "FitsCatalogStorage"
-        tables:        raw
     }
+    # dataset defined in obs_base modified in this mapper as follows:
     icSrc: {
         template:      "icSrc/v%(visit)d-f%(filter)s/R%(raft)s/S%(sensor)s.fits"
-        python:        "lsst.afw.table.SourceCatalog"
-        persistable:        "SourceCatalog"
-        storage:    "FitsCatalogStorage"
-        tables:        raw
     }
     icMatch: {
         template:      "icMatch/v%(visit)d-f%(filter)s/R%(raft)s/S%(sensor)s.fits"
@@ -216,26 +181,14 @@ datasets: {
         storage:    "FitsCatalogStorage"
         tables:        raw
     }
+    # dataset defined in obs_base modified in this mapper as follows:
     srcMatch: {
         template:      "srcMatch/v%(visit)d-f%(filter)s/R%(raft)s/S%(sensor)s.fits"
-        python:        "lsst.afw.table.BaseCatalog"
-        persistable:        "BaseCatalog"
-        storage:    "FitsCatalogStorage"
-        tables:        raw
     }
-    apCorr: {
-        template:      "apCorr/v%(visit)d-f%(filter)s/R%(raft)s/S%(sensor)s.pickle"
-        python:        "lsst.meas.algorithms.ApertureCorrection"
-        persistable:        "ApertureCorrection"
-        storage:    "PickleStorage"
-        tables:        raw
-    }
+    # dataset defined in obs_base modified in this mapper as follows:
     forced_src: {
         template:      "forced/%(tract)d/v%(visit)d-f%(filter)s/R%(raft)s/S%(sensor)s.fits"
-        python:        "lsst.afw.table.SourceCatalog"
         persistable:        "SourceCatalog"
-        storage:    "FitsCatalogStorage"
-        tables:        raw
     }
     # dataset defined in obs_base modified in this mapper as follows:
     forced_src_schema: {
@@ -243,18 +196,9 @@ datasets: {
     }
     forcedPhotCcd_metadata: {
         template: "forcedPhotCcd_metadata/tract%(tract)d/%(visit)d-%(sensor)s.boost"
-        python:        "lsst.daf.base.PropertySet"
-        persistable:        "PropertySet"
-        storage:    "BoostStorage"
-        tables:        raw
-        tables:        raw_visit
     }
     src: {
         template:      "src/v%(visit)d-f%(filter)s/R%(raft)s/S%(sensor)s.fits"
-        python:        "lsst.afw.table.SourceCatalog"
-        persistable:        "SourceCatalog"
-        storage:    "FitsCatalogStorage"
-        tables:        raw
     }
     Mosaic_metadata: {
         template:      "metadata/Mosaic.boost"
@@ -265,38 +209,18 @@ datasets: {
     }
     processCcd_metadata: {
         template:      "processCcd_metadata/v%(visit)d-f%(filter)s/R%(raft)s/S%(sensor)s.boost"
-        python:        "lsst.daf.base.PropertySet"
-        persistable:        "PropertySet"
-        storage:    "BoostStorage"
-        tables:        raw
     }
     isr_config: {
-        template:      "config/isr.py"
         python:        "lsst.obs.lsstSim.LsstSimIsrConfig"
-        persistable:      "Config"
-        storage:    "ConfigStorage"
-        tables:        raw
     }
     isr_metadata: {
         template:      "isr_metadata/v%(visit)d-f%(filter)s/R%(raft)s/S%(sensor)s.boost"
-        python:        "lsst.daf.base.PropertySet"
-        persistable:        "PropertySet"
-        storage:    "BoostStorage"
-        tables:        raw
     }
     characterizeImage_metadata: {
         template:      "characterizeImage_metadata/v%(visit)d-f%(filter)s/R%(raft)s/S%(sensor)s.boost"
-        python:        "lsst.daf.base.PropertySet"
-        persistable:        "PropertySet"
-        storage:    "BoostStorage"
-        tables:        raw
     }
     calibrate_metadata: {
         template:      "calibrate_metadata/v%(visit)d-f%(filter)s/R%(raft)s/S%(sensor)s.boost"
-        python:        "lsst.daf.base.PropertySet"
-        persistable:        "PropertySet"
-        storage:    "BoostStorage"
-        tables:        raw
     }
     processEimage_config: {
         template:      "config/processEimage.py"
