@@ -23,8 +23,13 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import astropy.time
+import astropy.coordinates as coord
+import math
+
+from lsst.daf.base import DateTime
 from lsst.afw.image import makeVisitInfo, RotType_SKY
-from lsst.afw.geom import degrees
+from lsst.afw.geom import degrees, radians
 from lsst.afw.coord import Coord, IcrsCoord, Observatory, Weather
 from lsst.obs.base import MakeRawVisitInfo
 
@@ -67,6 +72,12 @@ class MakeLsstSimRawVisitInfo(MakeRawVisitInfo):
             self.pascalFromMmHg(self.popFloat(md, "PRESS")),
             float("nan"),
         )
+        # phosim doesn't supply LST or HA, so we have to approximate it (until we get UT1; DM-8053)
+        az, alt = argDict["boresightAzAlt"]
+        dec = argDict['boresightRaDec'][1]
+        ha = math.asin(-math.sin(az)*math.cos(alt)/math.cos(dec))*radians
+        lst = ha + argDict["boresightRaDec"][0]
+        argDict["era"] = self.eraFromLstAndLongitude(lst, self.observatory.getLongitude())
         return makeVisitInfo(**argDict)
 
     def getDateAvg(self, md, exposureTime):

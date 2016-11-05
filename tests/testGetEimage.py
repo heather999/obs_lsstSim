@@ -87,6 +87,11 @@ class GetEimageTestCase(lsst.utils.tests.TestCase):
         date = DateTime("1994-01-02T01:46:59.520000913", DateTime.TAI)
         self.assertEqual(date, self.visit_info.getDate())
 
+    def test_getEra(self):
+        lst = -1.23456*afwGeom.degrees
+        longitude = -70.749417*afwGeom.degrees
+        self.assertAnglesNearlyEqual(lst - longitude, self.visit_info.getEra())
+
     def test_getExposureId(self):
         self.assertEqual(430204, self.visit_info.getExposureId())
 
