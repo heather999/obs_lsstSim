@@ -88,7 +88,7 @@ class GetEimageTestCase(lsst.utils.tests.TestCase):
         self.assertEqual(date, self.visit_info.getDate())
 
     def test_getEra(self):
-        lst = -1.23456*afwGeom.degrees
+        lst = 53.009138499999985*afwGeom.degrees
         longitude = -70.749417*afwGeom.degrees
         self.assertAnglesNearlyEqual(lst - longitude, self.visit_info.getEra())
 
